@@ -1,9 +1,12 @@
 const express = require('express')
+const fs = require('fs')
 
 const app = express()
 const users = require('./MOCK_DATA.json')
 
 const PORT = 8000;
+
+app.use(express.urlencoded({extended: false}));
 
 //
 app.get('/users', (req,res)=> {
@@ -35,9 +38,14 @@ app.route('api/users/:id').get((req,res)=> {
     return res.json({status:"pending"})
 })
 
-// app.post('api/users', (req,res)=>{
-//     return res.json({status:"pending"})
-// })
+app.post('/api/users', (req,res)=>{
+    const body = req.body;
+    users.push({...body, id: users.length + 1});
+    fs.writeFile('./MOCK_DATA.json', JSON.stringify(users),(err,data)=>{
+        return res.json({status:"sucess",id: users.length })
+    })
+   
+})
 // app.patch('api/users/:id', (req,res)=>{
 //     return res.json({status:"pending"})
 // })
