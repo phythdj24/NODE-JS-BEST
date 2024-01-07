@@ -8,6 +8,19 @@ const PORT = 8000;
 
 //middleware
 app.use(express.urlencoded({extended: false}));
+// app.use((req,res, next)=> {
+//     console.log("Hello From Middleware 1");
+//     next()
+//     // return res.json({msg:"Hello from Middleware 1"})
+
+// })
+
+// app.use((req,res, next)=> {
+//     fs.appendFile('log.txt', `${Date.now()}: ${req.method}:${req.path}`, (err,data)=>{
+//         next()
+//     })
+
+// })
 
 
 app.get('/users', (req,res)=> {
@@ -23,6 +36,7 @@ app.get('/users', (req,res)=> {
 
 
 app.get('/api/users', (req,res)=>{
+    res.setHeader("myname","Atharv Dalal")
     return res.json(users)
 })
 
