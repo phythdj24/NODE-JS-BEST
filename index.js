@@ -6,9 +6,10 @@ const users = require('./MOCK_DATA.json')
 
 const PORT = 8000;
 
+//middleware
 app.use(express.urlencoded({extended: false}));
 
-//
+
 app.get('/users', (req,res)=> {
     const html = `
     <ul>
@@ -49,9 +50,10 @@ app.post('/api/users', (req,res)=>{
 // app.patch('api/users/:id', (req,res)=>{
 //     return res.json({status:"pending"})
 // })
-// app.delete('api/users/:id', (req,res)=>{
-//     return res.json({status:"pending"})
-// })
+
+app.delete('api/users/:id', (req,res)=>{
+    return res.json({status:"pending"})
+})
 
 
 app.listen(PORT, ()=> console.log(`Server started at Port:${PORT}`))
